@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+.container {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+}
+
+p {
+    font-family: "Roboto Mono", sans-serif;
+    font-size: 26px;
+    margin: 20px 0;
+    text-align: center;
+
+    small {
+        font-size: 0.5em;
+    }
+}
+
+.responsive_table {
+    li {
+        list-style-type: none;
+        border-radius: 3px;
+        padding: 25px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .table_header {
+        background-color: #95A5A6;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+    }
+
+    .table_row {
+        background-color: #ffffff;
+        box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    .aprovado {
+        background-color: rgba(0, 255, 0, 0.5);
+        border-radius: 16px;
+        padding: 16px;
+        color: rgba(0, 0, 0, 0.7);
+        font-weight: 700;
+    }
+
+    .cancelado {
+        background-color: rgba(255, 0, 0, 0.479);
+        border-radius: 16px;
+        padding: 16px;
+        color: rgba(0, 0, 0, 0.7);
+        font-weight: 700;
+    }
+
+    .rejeitado {
+        background-color: yellow;
+        border-radius: 16px;
+        padding: 16px;
+        color: rgba(0, 0, 0, 0.7);
+        font-weight: 700;
+    }
+
+    .col_1 {
+        flex-basis: 10%;
+    }
+
+    .col_2 {
+        flex-basis: 40%;
+    }
+
+    .col_3 {
+        flex-basis: 25%;
+    }
+
+    .col_4 {
+        flex-basis: 25%;
+    }
+
+    @media all and (max-width: 767px) {
+        .table_header {
+            display: none;
+        }
+
+        li {
+            display: block;
+        }
+
+        .col {
+
+            flex-basis: 100%;
+
+        }
+
+        .col {
+            display: flex;
+            padding: 10px 0;
+
+            &:before {
+                color: #6C7A89;
+                padding-right: 10px;
+                content: attr(data-label);
+                flex-basis: 50%;
+                text-align: right;
+            }
+        }
+    }
+}
+
+.modal{
+    text-align: center;
+}
+
+.modal_content h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 16px 16px 0 0;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.modal_content p {
+    font-size: 15px;
+}
+
+.modal_content div{
+    margin-top: 10px;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    background-color: rgba(0, 0, 0, 0.020);
+}

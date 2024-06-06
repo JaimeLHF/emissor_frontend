@@ -1,0 +1,17 @@
+.layout {
+    display: flex;
+}
+
+.sider-fixed {
+    position: fixed;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    overflow: auto;
+}
+
+.content {
+    margin-left: 200px; /* Ajuste este valor conforme necessário para corresponder à largura do Sider */
+    padding: 20px;
+}

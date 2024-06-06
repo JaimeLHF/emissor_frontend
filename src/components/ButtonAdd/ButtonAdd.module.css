@@ -1,0 +1,23 @@
+.btn {
+    border-radius: 16px;
+    outline: none;
+    border: none;
+    background-color: #C2E7FF;
+    color: black;
+    font-weight: 600;
+    font-size: larger;
+    padding: 15px 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+.btn:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    box-shadow: 0 3px 5px 3px rgba(60, 64, 67, .3);
+}
+
+.icon {
+    padding: 0 7px;
+    font-size: medium;  
+}

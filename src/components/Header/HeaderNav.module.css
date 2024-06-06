@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Seymour+One&display=swap');
+
+.header_nav{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.titulo{
+    font-family: 'Seymour One', sans-serif;
+    font-size: 24px;
+}

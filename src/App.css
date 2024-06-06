@@ -1,0 +1,14 @@
+/* App.css */
+.App {
+  display: flex;
+}
+
+.content {
+  margin-left: 250px; /* largura do sidebar quando aberto */
+  padding: 20px;
+  transition: margin-left 0.3s;
+}
+
+.sidebar.closed ~ .content {
+  margin-left: 60px; /* largura do sidebar quando fechado */
+}
