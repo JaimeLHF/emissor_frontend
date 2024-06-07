@@ -46,29 +46,34 @@ export function Produtos() {
                 <p>Produtos</p>
                 <InputSearch placeholder={"Search..."} />
             </div>
-            
-            {loading ? (
-                <Loading />
-            ) : (
-                <ul className={styles.responsive_table}>
-                    <li className={styles.table_header}>
-                        <div className={`${styles.col} ${styles.col_1}`}>ID</div>
-                        <div className={`${styles.col} ${styles.col_2}`}>Produto</div>
-                        <div className={`${styles.col} ${styles.col_3}`}>Acabamento</div>
-                        <div className={`${styles.col} ${styles.col_4}`}>Valor</div>
-                        <div className={`${styles.col} ${styles.col_4}`}></div>
-                    </li>
-                    {produtos.map((e) => (
-                        <li key={e.id} className={styles.table_row}>
-                            <div className={`${styles.col} ${styles.col_1}`} >{e.id}</div>
-                            <div className={`${styles.col} ${styles.col_2}`}>{e.nome}</div>
-                            <div className={`${styles.col} ${styles.col_3}`}>{e.acabamento_id ? e.acabamento.nome : '- - -'}</div>
-                            <div className={`${styles.col} ${styles.col_4}`}>{e.valor}</div>
-                            <div className={`${styles.col} ${styles.col_4}`}><Button onClick={() => handleDetalhesClick(e)}>Detalhes</Button></div>
-                        </li>
-                    ))}
-                </ul>
-            )}
+
+
+            <ul className={styles.responsive_table}>
+
+                <li className={styles.table_header}>
+                    <div className={`${styles.col} ${styles.col_1}`}>ID</div>
+                    <div className={`${styles.col} ${styles.col_2}`}>Produto</div>
+                    <div className={`${styles.col} ${styles.col_3}`}>Acabamento</div>
+                    <div className={`${styles.col} ${styles.col_4}`}>Valor</div>
+                    <div className={`${styles.col} ${styles.col_4}`}></div>
+                </li>
+
+                {loading ? (
+                    <Loading />
+                ) : (
+                    <div>
+                        {produtos.map((e) => (
+                            <li key={e.id} className={styles.table_row}>
+                                <div className={`${styles.col} ${styles.col_1}`} >{e.id}</div>
+                                <div className={`${styles.col} ${styles.col_2}`}>{e.nome}</div>
+                                <div className={`${styles.col} ${styles.col_3}`}>{e.acabamento_id ? e.acabamento.nome : '- - -'}</div>
+                                <div className={`${styles.col} ${styles.col_4}`}>{e.valor}</div>
+                                <div className={`${styles.col} ${styles.col_4}`}><Button onClick={() => handleDetalhesClick(e)}>Detalhes</Button></div>
+                            </li>
+                        ))}
+                    </div>
+                )}
+            </ul>
 
             <Modal
                 className={styles.modal}

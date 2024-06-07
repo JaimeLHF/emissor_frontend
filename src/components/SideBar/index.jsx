@@ -1,4 +1,4 @@
-import { HomeOutlined, PieChartOutlined, DesktopOutlined, MailOutlined, AppstoreOutlined, TruckOutlined } from '@ant-design/icons';
+import { HomeOutlined, PieChartOutlined, SmileOutlined, MailOutlined, AppstoreOutlined, TruckOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -20,7 +20,7 @@ const items = [
     },
     {
         key: '/clientes',
-        icon: <DesktopOutlined />,
+        icon: <SmileOutlined />,
         label: 'Clientes',
     },
     {

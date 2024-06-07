@@ -47,7 +47,8 @@ export default function Vendas() {
                 <InputSearch placeholder={"Search..."} />
             </div>
 
-            {loading ? <Loading /> : <ul className={styles.responsive_table}>
+
+            <ul className={styles.responsive_table}>
                 <li className={styles.table_header}>
                     <div className={`${styles.col} ${styles.col_1}`}>ID</div>
                     <div className={`${styles.col} ${styles.col_2}`}>Cliente</div>
@@ -57,19 +58,24 @@ export default function Vendas() {
                     <div className={`${styles.col} ${styles.col_4}`}></div>
                     <div className={`${styles.col} ${styles.col_4}`}></div>
                 </li>
-                {vendas.map((e) => (
-                    <li key={e.id} className={styles.table_row}>
-                        <div className={`${styles.col} ${styles.col_1}`} >{e.id}</div>
-                        <div className={`${styles.col} ${styles.col_2}`}>{e.cliente.nome}</div>
-                        <div className={`${styles.col} ${styles.col_3}`}>{e.valorTotal}</div>
-                        <div className={`${styles.col} ${styles.col_4}`}>{e.numero_nfe}</div>
-                        <div className={`${styles.col} ${styles.col_4} ${styles[e.status.toLowerCase()]}`}>{e.status}</div>
-                        <div className={`${styles.col} ${styles.col_4}`}><Button onClick={() => handleDetalhesClick(e)}>Detalhes</Button></div>
-                        <div className={`${styles.col} ${styles.col_4}`}><Button><a href={`https://api.drd.app.br/api/nfe/imprimir/${e.id}`}>Download</a></Button></div>
-                    </li>
-                ))}
-
-            </ul>}
+                {loading ? (
+                    <Loading />
+                ) : (
+                    <div>
+                        {vendas.map((e) => (
+                            <li key={e.id} className={styles.table_row}>
+                                <div className={`${styles.col} ${styles.col_1}`} >{e.id}</div>
+                                <div className={`${styles.col} ${styles.col_2}`}>{e.cliente.nome}</div>
+                                <div className={`${styles.col} ${styles.col_3}`}>{e.valorTotal}</div>
+                                <div className={`${styles.col} ${styles.col_4}`}>{e.numero_nfe}</div>
+                                <div className={`${styles.col} ${styles.col_4} ${styles[e.status.toLowerCase()]}`}>{e.status}</div>
+                                <div className={`${styles.col} ${styles.col_4}`}><Button onClick={() => handleDetalhesClick(e)}>Detalhes</Button></div>
+                                <div className={`${styles.col} ${styles.col_4}`}><Button><a href={`https://api.drd.app.br/api/nfe/imprimir/${e.id}`} target='blank'>Download</a></Button></div>
+                            </li>
+                        ))}
+                    </div>
+                )}
+            </ul>
             <Modal
                 className={styles.modal}
                 title="Detalhes da Venda"

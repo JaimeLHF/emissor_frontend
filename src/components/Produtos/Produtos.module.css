@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
 .container {
+    position: relative;
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
     padding-left: 10px;
     padding-right: 10px;
-    height: 100vh;
 }
 
 .actions {
@@ -14,6 +14,11 @@
     align-items: center;
     justify-content: space-between;
     text-align: center;
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #f5f5f5;
 }
 
 p {
@@ -43,6 +48,9 @@ p {
         font-weight: bold;
         text-transform: uppercase;
         letter-spacing: 0.03em;
+        position: sticky;
+        top: 85px;
+        z-index: 999;
     }
 
     .table_row {
