@@ -6,6 +6,7 @@
     margin-right: auto;
     padding-left: 10px;
     padding-right: 10px;
+    height: 100vh;
 }
 
 .actions {
@@ -95,7 +96,7 @@ p {
     }
 }
 
-.modal{
+.modal {
     text-align: center;
 }
 
@@ -112,7 +113,7 @@ p {
     font-size: 15px;
 }
 
-.modal_content div{
+.modal_content div {
     margin-top: 10px;
     border-radius: 16px;
     border: 1px solid rgba(0, 0, 0, 0.05);

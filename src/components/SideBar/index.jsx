@@ -1,4 +1,4 @@
-import { HomeOutlined, PieChartOutlined, DesktopOutlined, MailOutlined, AppstoreOutlined } from '@ant-design/icons';
+import { HomeOutlined, PieChartOutlined, DesktopOutlined, MailOutlined, AppstoreOutlined, TruckOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -35,25 +35,28 @@ const items = [
     },
     {
         key: '/transportadoras',
-        icon: <AppstoreOutlined />,
+        icon: <TruckOutlined />,
         label: 'Transportadoras',
     },
 ];
 
 const SideBar = () => {
+
     const localizacao = useLocation();
+    
     const navigate = useNavigate();
+
     const [collapsed, setCollapsed] = useState(false);
 
     const onMenuClick = (item) => {
         navigate(item.key);
     };
 
-    // Encontre a chave que corresponde à localizacao.pathname
-    const selectedKey = items.find((item) => {
-        const regex = new RegExp(`${item.key}/([^/]+)`);
-        return regex.test(localizacao.pathname);
-    })?.key || '/';
+    const getBasePath = (pathname) => {
+        const parts = pathname.split('/');
+        const defaultSelected = parts.length > 2 ? `/${parts[1]}` : pathname;
+        return defaultSelected;
+    };
 
     return (
         <Sider
@@ -65,7 +68,7 @@ const SideBar = () => {
             <Menu
                 className={collapsed ? styles.collapsed : styles.sider_fixed}
                 theme="dark"
-                defaultSelectedKeys={[selectedKey]}
+                defaultSelectedKeys={[getBasePath(localizacao.pathname)]}
                 mode="inline"
                 items={items}
                 onClick={onMenuClick}

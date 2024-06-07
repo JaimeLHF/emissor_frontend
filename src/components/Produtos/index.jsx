@@ -3,11 +3,13 @@ import { Modal, Button } from 'antd';
 import styles from './Produtos.module.css';
 import InputSearch from '../InputSearch';
 import ButtonAdd from '../ButtonAdd';
+import Loading from '../Loading';
 
 export function Produtos() {
     const [produtos, setProdutos] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetch(`https://api.drd.app.br/api/produtos`, {
@@ -19,8 +21,12 @@ export function Produtos() {
             .then((res) => res.json())
             .then((data) => {
                 setProdutos(data);
+                setLoading(false);
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                console.log(err);
+                setLoading(false);
+            });
     }, []);
 
     const handleDetalhesClick = (produto) => {
@@ -40,29 +46,32 @@ export function Produtos() {
                 <p>Produtos</p>
                 <InputSearch placeholder={"Search..."} />
             </div>
-
-            <ul className={styles.responsive_table}>
-                <li className={styles.table_header}>
-                    <div className={`${styles.col} ${styles.col_1}`}>ID</div>
-                    <div className={`${styles.col} ${styles.col_2}`}>Produto</div>
-                    <div className={`${styles.col} ${styles.col_3}`}>Acabamento</div>
-                    <div className={`${styles.col} ${styles.col_4}`}>Valor</div>
-                    <div className={`${styles.col} ${styles.col_4}`}></div>
-                </li>
-                {produtos.map((e) => (
-                    <li key={e.id} className={styles.table_row}>
-                        <div className={`${styles.col} ${styles.col_1}`} >{e.id}</div>
-                        <div className={`${styles.col} ${styles.col_2}`}>{e.nome}</div>
-                        <div className={`${styles.col} ${styles.col_3}`}>{e.acabamento_id ? e.acabamento.nome : '- - -'}</div>
-                        <div className={`${styles.col} ${styles.col_4}`}>{e.valor}</div>
-                        <div className={`${styles.col} ${styles.col_4}`}><Button onClick={() => handleDetalhesClick(e)}>Detalhes</Button></div>
+            
+            {loading ? (
+                <Loading />
+            ) : (
+                <ul className={styles.responsive_table}>
+                    <li className={styles.table_header}>
+                        <div className={`${styles.col} ${styles.col_1}`}>ID</div>
+                        <div className={`${styles.col} ${styles.col_2}`}>Produto</div>
+                        <div className={`${styles.col} ${styles.col_3}`}>Acabamento</div>
+                        <div className={`${styles.col} ${styles.col_4}`}>Valor</div>
+                        <div className={`${styles.col} ${styles.col_4}`}></div>
                     </li>
-                ))}
-
-            </ul>
+                    {produtos.map((e) => (
+                        <li key={e.id} className={styles.table_row}>
+                            <div className={`${styles.col} ${styles.col_1}`} >{e.id}</div>
+                            <div className={`${styles.col} ${styles.col_2}`}>{e.nome}</div>
+                            <div className={`${styles.col} ${styles.col_3}`}>{e.acabamento_id ? e.acabamento.nome : '- - -'}</div>
+                            <div className={`${styles.col} ${styles.col_4}`}>{e.valor}</div>
+                            <div className={`${styles.col} ${styles.col_4}`}><Button onClick={() => handleDetalhesClick(e)}>Detalhes</Button></div>
+                        </li>
+                    ))}
+                </ul>
+            )}
 
             <Modal
-            className={styles.modal}
+                className={styles.modal}
                 title="Detalhes do Produto"
                 open={modalVisible}
                 onCancel={closeModal}

@@ -3,11 +3,13 @@ import { Modal, Button } from 'antd';
 import styles from './Vendas.module.css';
 import InputSearch from '../InputSearch';
 import ButtonAdd from '../ButtonAdd';
+import Loading from '../Loading';
 
 export default function Vendas() {
     const [vendas, setVendas] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedVenda, setSelectedVenda] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetch(`https://api.drd.app.br/api/venda`, {
@@ -19,8 +21,12 @@ export default function Vendas() {
             .then((res) => res.json())
             .then((data) => {
                 setVendas(data);
+                setLoading(false)
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                setLoading(false)
+                console.log(err)
+            });
     }, []);
 
     const handleDetalhesClick = (produto) => {
@@ -41,7 +47,7 @@ export default function Vendas() {
                 <InputSearch placeholder={"Search..."} />
             </div>
 
-            <ul className={styles.responsive_table}>
+            {loading ? <Loading /> : <ul className={styles.responsive_table}>
                 <li className={styles.table_header}>
                     <div className={`${styles.col} ${styles.col_1}`}>ID</div>
                     <div className={`${styles.col} ${styles.col_2}`}>Cliente</div>
@@ -63,7 +69,7 @@ export default function Vendas() {
                     </li>
                 ))}
 
-            </ul>
+            </ul>}
             <Modal
                 className={styles.modal}
                 title="Detalhes da Venda"
