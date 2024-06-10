@@ -10,6 +10,7 @@ export function Produtos() {
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [searchValue, setSearchValue] = useState('');
 
     useEffect(() => {
         fetch(`https://api.drd.app.br/api/produtos`, {
@@ -29,6 +30,14 @@ export function Produtos() {
             });
     }, []);
 
+    const handleSearch = (value) => {
+        setSearchValue(value);
+    };
+
+    const filteredProdutos = produtos.filter((produto) =>
+        produto.nome.toLowerCase().includes(searchValue.toLowerCase())
+    );
+
     const handleDetalhesClick = (produto) => {
         setSelectedProduct(produto);
         setModalVisible(true);
@@ -44,7 +53,7 @@ export function Produtos() {
             <div className={styles.actions}>
                 <ButtonAdd to='new' text={'New Product'} />
                 <p>Produtos</p>
-                <InputSearch placeholder={"Search..."} />
+                <InputSearch placeholder={"Search..."} onSearch={handleSearch}/>
             </div>
 
 
@@ -62,7 +71,7 @@ export function Produtos() {
                     <Loading />
                 ) : (
                     <div>
-                        {produtos.map((e) => (
+                        {filteredProdutos.map((e) => (
                             <li key={e.id} className={styles.table_row}>
                                 <div className={`${styles.col} ${styles.col_1}`} >{e.id}</div>
                                 <div className={`${styles.col} ${styles.col_2}`}>{e.nome}</div>
