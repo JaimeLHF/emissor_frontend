@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import Input from '../Input';
 import { useState } from 'react';
+import axios from 'axios';
 
 const Formulariorodutos = () => {
     const initialValues = {
@@ -48,47 +49,43 @@ const Formulariorodutos = () => {
     const produtos = {
         nome,
         tipo,
-        acabamento_id,
-        valor,
+        acabamento_id: parseInt(acabamento_id, 10),
+        valor: parseFloat(valor),
         cfop_interno,
         cfop_externo,
         ncm,
-        orig,
+        orig: parseInt(orig, 10),
         codigo_barras,
         und_venda,
         cst_csosn,
         cst_pis,
         cst_cofins,
         cst_ipi,
-        perc_icms,
-        perc_pis,
-        perc_cofins,
-        perc_ipi
+        perc_icms: parseFloat(perc_icms),
+        perc_pis: parseFloat(perc_pis),
+        perc_cofins: parseFloat(perc_cofins),
+        perc_ipi: parseFloat(perc_ipi)
     };
 
     const saveForm = async (event) => {
-
         event.preventDefault();
-        setIsPending(true)
+        setIsPending(true);
         try {
-            const response = await fetch('https://api.drd.app.br/api/produtos/new', {
-                method: 'POST',
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ produtos: [produtos] })
+            const response = await axios.post('https://api.drd.app.br/api/produtos/new', {
+                produtos: [produtos]
             });
 
-            if (!response.ok) {
+            if (response.status !== 200) {
                 // Lança um erro se a resposta não for bem-sucedida
                 throw new Error(`Erro na requisição: ${response.statusText}`);
             }
 
-            const data = await response.json();
             setIsPending(false);
-            console.log(data);
+            console.log(response.data);
         } catch (error) {
+            setIsPending(false);
             console.error('Erro ao cadastrar o produto:', error);
         }
-
     };
 
 

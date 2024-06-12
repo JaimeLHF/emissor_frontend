@@ -8,7 +8,9 @@ import PagePadrao from "./pages/Home";
 import NotFound from "./pages/404";
 import Vendas from "./components/Vendas";
 import { Clientes } from "./components/Clientes";
-import Formulariorodutos from "./components/FormProd";
+// import Formulariorodutos from "./components/FormProd";
+import FormularioAcabamentos from "./components/FormAcab";
+import Heart from "./components/Namorados";
 
 const { Content } = Layout;
 
@@ -16,25 +18,10 @@ function AppRoutes() {
     return (
         <BrowserRouter>
             <Layout style={{ minHeight: '100vh' }}>
-                <SideBar />
-                <Layout>
-                    <HeaderNav />
-                    <Content style={{ margin: '16px' }}>
-                 
-                        <Routes>
-                            <Route path="/" element={<PagePadrao />} />
-                            <Route path="/clientes" element={<Clientes />} />
-                            <Route path="/produtos" element={<Produtos />} />
-                            <Route path="/vendas" element={<Vendas />} />
-                            <Route path="*" element={<NotFound />} />
-                      
-                        
-                      
-                            <Route path="/produtos/new" element={<Formulariorodutos />} />
-                            
-                        </Routes>
-                    </Content> 
-                </Layout>
+
+                <Routes>
+                    <Route path="/produtos/new/namorados" element={<Heart />} />
+                </Routes>
             </Layout>
         </BrowserRouter>
     );

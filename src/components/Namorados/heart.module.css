@@ -1,0 +1,25 @@
+.heartContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2em;
+    height: 100vh;
+}
+
+.heart {
+    font-size: 75px;
+    color: red;
+    transform-origin: center;
+    animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.2);
+    }
+}
