@@ -15,7 +15,7 @@ function InputSearch({ placeholder, onSearch }) {
             <input type="text" placeholder={placeholder} onChange={handleChange} />
             <span className={styles.highlight}></span>
             <span className={styles.bar}></span>
-            <label><span className={styles.icon}><SearchOutlined /></span>{placeholder}</label>
+            <label className={styles.label_lupa}><span className={styles.icon}><SearchOutlined /></span>{placeholder}</label>
         </div>
     );
 }

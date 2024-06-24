@@ -14,10 +14,7 @@ export function Produtos() {
 
     useEffect(() => {
         fetch(`https://api.drd.app.br/api/produtos`, {
-            method: "GET",
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            method: "GET",            
         })
             .then((res) => res.json())
             .then((data) => {

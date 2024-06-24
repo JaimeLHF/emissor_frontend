@@ -22,7 +22,7 @@ input:focus {
     font-size: medium;
 }
 
-label {
+.label_lupa {
     color: #999;
     font-family: 'Roboto Mono', sans-serif;
     font-weight: normal;
@@ -35,8 +35,8 @@ label {
     -webkit-transition: 0.2s ease all;
 }
 
-input:focus~label,
-input:valid~label {
+input:focus~.label_lupa,
+input:valid~.label_lupa {
     top: -20px;
     font-size: 14px;
     color: #5264AE;

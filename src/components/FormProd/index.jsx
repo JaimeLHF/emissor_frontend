@@ -71,7 +71,7 @@ const Formulariorodutos = () => {
         event.preventDefault();
         setIsPending(true);
         try {
-            const response = await axios.post('https://api.drd.app.br/api/produtos/new', {
+            const response = await axios.post('http://localhost/api/produtos/new', {
                 produtos: [produtos]
             });
 
