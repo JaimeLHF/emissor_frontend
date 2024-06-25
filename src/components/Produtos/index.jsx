@@ -14,7 +14,7 @@ export function Produtos() {
 
     useEffect(() => {
         fetch(`https://api.drd.app.br/api/produtos`, {
-            method: "GET",            
+            method: "GET",
         })
             .then((res) => res.json())
             .then((data) => {
@@ -45,12 +45,19 @@ export function Produtos() {
         setSelectedProduct(null);
     };
 
+    const formatarMoeda = (valor) => {
+        return valor.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+        });
+    };
+
     return (
         <div className={styles.container}>
             <div className={styles.actions}>
                 <ButtonAdd to='new' text={'New Product'} />
                 <p>Produtos</p>
-                <InputSearch placeholder={"Search..."} onSearch={handleSearch}/>
+                <InputSearch placeholder={"Search..."} onSearch={handleSearch} />
             </div>
 
 
@@ -73,7 +80,7 @@ export function Produtos() {
                                 <div className={`${styles.col} ${styles.col_1}`} >{e.id}</div>
                                 <div className={`${styles.col} ${styles.col_2}`}>{e.nome}</div>
                                 <div className={`${styles.col} ${styles.col_3}`}>{e.acabamento_id ? e.acabamento.nome : '- - -'}</div>
-                                <div className={`${styles.col} ${styles.col_4}`}>{e.valor}</div>
+                                <div className={`${styles.col} ${styles.col_4}`}>{formatarMoeda(e.valor)}</div>
                                 <div className={`${styles.col} ${styles.col_4}`}><Button onClick={() => handleDetalhesClick(e)}>Detalhes</Button></div>
                             </li>
                         ))}
@@ -100,7 +107,7 @@ export function Produtos() {
                             <p>Nome: <span className="content_modal">{selectedProduct.nome}</span></p>
                             <p>Acabamento: <span className="content_modal">{selectedProduct.acabamento_id ? selectedProduct.acabamento.nome : '- - -'}</span></p>
                             <p>Tipo: <span className="content_modal">{selectedProduct.tipo}</span></p>
-                            <p>Valor: <span className="content_modal">{selectedProduct.valor}</span></p>
+                            <p>Valor: <span className="content_modal">{formatarMoeda(selectedProduct.valor)}</span></p>
                             <p>Unidade de Venda: <span className="content_modal"> {selectedProduct.und_venda}</span></p>
                         </div>
                         <div>

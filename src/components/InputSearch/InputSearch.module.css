@@ -1,129 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
-
-.group {
-    position: relative; 
+.search_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
 }
 
-input {
-    font-size: 18px;
-    padding: 10px 10px 10px 5px;
-    display: block;
-    width: 300px;
-    border: none;
-    border-bottom: 1px solid #757575;
-}
-
-input:focus {
+.search_input {
+    width: 250px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 25px 0 0 25px;
     outline: none;
+    transition: border 0.3s ease;
 }
 
-.icon{
-    padding: 0 7px;
-    font-size: medium;
+.search_input:focus {
+    border-color: #007bff;
 }
 
-.label_lupa {
-    color: #999;
-    font-family: 'Roboto Mono', sans-serif;
-    font-weight: normal;
-    position: absolute;
-    pointer-events: none;
-    left: 5px;
-    top: 10px;
-    transition: 0.2s ease all;
-    -moz-transition: 0.2s ease all;
-    -webkit-transition: 0.2s ease all;
-}
-
-input:focus~.label_lupa,
-input:valid~.label_lupa {
-    top: -20px;
-    font-size: 14px;
-    color: #5264AE;
-}
-
-/* BOTTOM BARS ================================= */
-.bar {
-    position: relative;
-    display: block;
-    width: 300px;
-}
-
-.bar:before,
-.bar:after {
-    content: '';
-    height: 2px;
-    width: 0;
-    bottom: 1px;
-    position: absolute;
-    background: #5264AE;
-    transition: 0.2s ease all;
-    -moz-transition: 0.2s ease all;
-    -webkit-transition: 0.2s ease all;
-}
-
-.bar:before {
-    left: 50%;
-}
-
-.bar:after {
-    right: 50%;
-}
-
-/* active state */
-input:focus~.bar:before,
-input:focus~.bar:after {
-    width: 50%;
-}
-
-/* HIGHLIGHTER ================================== */
-.highlight {
-    position: absolute;
-    height: 60%;
-    width: 100px;
-    top: 25%;
-    left: 0;
-    pointer-events: none;
-    opacity: 0.5;
-}
-
-/* active state */
-input:focus~.highlight {
-    -webkit-animation: inputHighlighter 0.3s ease;
-    -moz-animation: inputHighlighter 0.3s ease;
-    animation: inputHighlighter 0.3s ease;
-}
-
-/* ANIMATIONS ================ */
-@-webkit-keyframes inputHighlighter {
-    from {
-        background: #5264AE;
-    }
-
-    to {
-        width: 0;
-        background: transparent;
-    }
-}
-
-@-moz-keyframes inputHighlighter {
-    from {
-        background: #5264AE;
-    }
-
-    to {
-        width: 0;
-        background: transparent;
-    }
-}
-
-@keyframes inputHighlighter {
-    from {
-        background: #5264AE;
-    }
-
-    to {
-        width: 0;
-        background: transparent;
-    }
+.search_button {
+    padding: 12px 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0 25px 25px 0;
 }

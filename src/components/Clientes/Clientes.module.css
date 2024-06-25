@@ -1,8 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
+
+main {
+    height: 100%;
+}
+
+
 .container {
     position: relative;
-    max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
     padding-left: 10px;
@@ -51,7 +56,7 @@ p {
         text-transform: uppercase;
         letter-spacing: 0.03em;
         position: sticky;
-        top: 85px;
+        top: 110px;
         z-index: 999;
     }
 
@@ -130,7 +135,7 @@ p {
     }
 }
 
-.modal{
+.modal {
     text-align: center;
 }
 
@@ -147,7 +152,7 @@ p {
     font-size: 15px;
 }
 
-.modal_content div{
+.modal_content div {
     margin-top: 10px;
     border-radius: 16px;
     border: 1px solid rgba(0, 0, 0, 0.05);

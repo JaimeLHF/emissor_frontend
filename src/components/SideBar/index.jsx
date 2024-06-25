@@ -43,7 +43,7 @@ const items = [
 const SideBar = () => {
 
     const localizacao = useLocation();
-    
+
     const navigate = useNavigate();
 
     const [collapsed, setCollapsed] = useState(false);
@@ -60,20 +60,25 @@ const SideBar = () => {
 
     return (
         <Sider
+            className={styles.collapsed_aside}
             collapsible
             collapsed={collapsed}
             onCollapse={(value) => setCollapsed(value)}
         >
-            <Logo />
-            <Menu
-                className={collapsed ? styles.collapsed : styles.sider_fixed}
-                theme="dark"
-                defaultSelectedKeys={[getBasePath(localizacao.pathname)]}
-                mode="inline"
-                items={items}
-                onClick={onMenuClick}
-            />
-        </Sider>
+            <div className={styles.menu_collapse}>
+
+                <Logo />
+
+                <Menu
+                    theme="dark"
+                    defaultSelectedKeys={[getBasePath(localizacao.pathname)]}
+                    mode="inline"
+
+                    items={items}
+                    onClick={onMenuClick}
+                />
+            </div>
+        </Sider >
     );
 };
 

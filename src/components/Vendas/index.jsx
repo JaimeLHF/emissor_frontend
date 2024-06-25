@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Modal, Button } from 'antd';
+import { Button } from 'antd';
+import { Link } from 'react-router-dom';
+import { animateScroll as scroll } from "react-scroll";
 import styles from './Vendas.module.css';
 import InputSearch from '../InputSearch';
 import ButtonAdd from '../ButtonAdd';
@@ -7,8 +9,6 @@ import Loading from '../Loading';
 
 export default function Vendas() {
     const [vendas, setVendas] = useState([]);
-    const [modalVisible, setModalVisible] = useState(false);
-    const [selectedVenda, setSelectedVenda] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -21,22 +21,27 @@ export default function Vendas() {
             .then((res) => res.json())
             .then((data) => {
                 setVendas(data);
-                setLoading(false)
+                setLoading(false);
             })
             .catch((err) => {
-                setLoading(false)
-                console.log(err)
+                setLoading(false);
+                console.log(err);
             });
     }, []);
 
-    const handleDetalhesClick = (produto) => {
-        setSelectedVenda(produto);
-        setModalVisible(true);
+    const scrollToTop = () => {
+        scroll.scrollToTop({
+            duration: 500, // Duração da animação em milissegundos
+            smooth: "easeInOutQuart" // Efeito de animação (opcional)
+        });
     };
 
-    const closeModal = () => {
-        setModalVisible(false);
-        setSelectedVenda(null);
+
+    const formatarMoeda = (valor) => {
+        return valor.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+        });
     };
 
     return (
@@ -46,7 +51,6 @@ export default function Vendas() {
                 <p>Vendas</p>
                 <InputSearch placeholder={"Search..."} />
             </div>
-
 
             <ul className={styles.responsive_table}>
                 <li className={styles.table_header}>
@@ -64,67 +68,18 @@ export default function Vendas() {
                     <div>
                         {vendas.map((e) => (
                             <li key={e.id} className={styles.table_row}>
-                                <div className={`${styles.col} ${styles.col_1}`} >{e.id}</div>
+                                <div className={`${styles.col} ${styles.col_1}`}>{e.id}</div>
                                 <div className={`${styles.col} ${styles.col_2}`}>{e.cliente.nome}</div>
-                                <div className={`${styles.col} ${styles.col_3}`}>{e.valorTotal}</div>
+                                <div className={`${styles.col} ${styles.col_3}`}>{formatarMoeda(e.valorTotal)}</div>
                                 <div className={`${styles.col} ${styles.col_4}`}>{e.numero_nfe}</div>
                                 <div className={`${styles.col} ${styles.col_4} ${styles[e.status.toLowerCase()]}`}>{e.status}</div>
-                                <div className={`${styles.col} ${styles.col_4}`}><Button onClick={() => handleDetalhesClick(e)}>Detalhes</Button></div>
+                                <div className={`${styles.col} ${styles.col_4}`}><Link to={`/venda/${e.id}`}><Button onClick={scrollToTop}>Detalhes</Button></Link></div>
                                 <div className={`${styles.col} ${styles.col_4}`}><Button><a href={`https://api.drd.app.br/api/nfe/imprimir/${e.id}`} target='blank'>Download</a></Button></div>
                             </li>
                         ))}
                     </div>
                 )}
             </ul>
-            <Modal
-                className={styles.modal}
-                title="Detalhes da Venda"
-                open={modalVisible}
-                onCancel={closeModal}
-                footer={[
-                    <Button key="close" onClick={closeModal}>
-                        Fechar
-                    </Button>
-                ]}
-
-            >
-                {selectedVenda && (
-                    <div className={styles.modal_content}>
-                        <div>
-                            <h2>Informações Venda</h2>
-                            <p>ID: {selectedVenda.id}</p>
-                            <p>Cliente: {selectedVenda.cliente.nome}</p>
-                            <p>CPF/CNPJ: {selectedVenda.cliente.cpf_cnpj}</p>
-                            <p>Valor Total: {selectedVenda.valorTotal}</p>
-                            <p>Número da NF-e: {selectedVenda.numero_nfe}</p>
-                            <p>Status: {selectedVenda.status}</p>
-
-                        </div>
-
-                        <div>
-                            <h2>Informações Transporte</h2>
-                            <p>Modalidade do Frete: {selectedVenda.modFrete}</p>
-                            <p>Valor do Frete: {selectedVenda.vFrete}</p>
-                            <p>Endereço: {selectedVenda.cliente.rua}, {selectedVenda.cliente.numero}, {selectedVenda.cliente.bairro}, {selectedVenda.cliente.municipio} - {selectedVenda.cliente.uf}</p>
-                            <p>CEP: {selectedVenda.cliente.cep}</p>
-                            <p>Transportadora: {selectedVenda.transportadora ? selectedVenda.transportadora.nome : "Não especificada"}</p>
-
-                        </div>
-                        <div>
-                            <h2>Informações Fiscais</h2>
-
-                            <p>Finalidade da NF-e: {selectedVenda.finNFe}</p>
-                            <p>Sequência do Evento: {selectedVenda.sequencia_evento}</p>
-                            <p>Natureza da Operação: {selectedVenda.natOp}</p>
-
-                        </div>
-
-                        <p>Criado em: {new Date(selectedVenda.created_at).toLocaleString()}</p>
-                        <p>Atualizado em: {new Date(selectedVenda.updated_at).toLocaleString()}</p>
-                    </div>
-                )}
-            </Modal>
-
         </div>
     );
 }
